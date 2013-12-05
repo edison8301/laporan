@@ -1,0 +1,38 @@
+body{
+    background-color: #555555 !important;
+}
+
+#page-login {
+    background-color: #EEEEEE;
+    padding: 10px 20px;;
+    width: 40%;
+    margin-top:100px;
+    border-radius:10px;
+    text-align: center;
+}
+
+#page-login h3{
+    text-align:center;
+    padding:20px 10px 10px 10px;
+    font-size:20px;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+#page-login .buttons{
+    text-align: right;
+    padding-top:20px;
+    border-top: 1px solid #DDDDDD;
+}
+
+#page-login form{
+    width: 85%;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#LoginForm_rememberMe{
+    display: inline;
+    float: left;
+    margin-right: 10px;
+}
