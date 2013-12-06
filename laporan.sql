@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Waktu pembuatan: 05. Desember 2013 jam 14:41
+-- Waktu pembuatan: 06. Desember 2013 jam 10:42
 -- Versi Server: 5.1.33
 -- Versi PHP: 5.2.9
 
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data untuk tabel `role`
@@ -152,7 +152,8 @@ INSERT INTO `role` (`id`, `name`) VALUES
 (1, 'Administrator'),
 (2, 'Bidang'),
 (3, 'Seksi Pengedalian dan Operasional'),
-(4, 'Sub Bagian Program dan Evaluasi');
+(4, 'Sub Bagian Program dan Evaluasi'),
+(5, 'Sub Bidang');
 
 -- --------------------------------------------------------
 
@@ -164,6 +165,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `parent_id` int(11) DEFAULT '0',
   `role_id` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
   `last_login` timestamp NULL DEFAULT NULL,
@@ -179,14 +182,14 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `role_id`, `status`, `last_login`, `create_time`, `update_time`, `create_user_id`, `update_user_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, 1, '2013-12-02 14:18:43', NULL, '2013-12-05 06:38:01', NULL, 1),
-(2, 'sekretariat', '5b491f702c8ec3b957a3b01aa406b829', 1, 1, NULL, '2013-12-04 20:09:05', '2013-12-05 06:31:52', 1, 1),
-(3, 'edison8301', '5b491f702c8ec3b957a3b01aa406b829', 2, 1, NULL, '2013-12-04 20:09:51', '2013-12-05 07:27:52', 1, 1),
-(4, 'keuangan', 'a4151d4b2856ec63368a7c784b1f0a6e', 1, 1, NULL, '2013-12-04 20:10:02', NULL, 1, NULL),
-(5, 'program', 'a9c449d4fa44e9e5a41c574ae55ce4d9', 1, 1, NULL, '2013-12-04 20:10:14', NULL, 1, NULL),
-(6, 'postel', '2b9afa616f6820d810268b6f72068ae8', 1, 1, NULL, '2013-12-04 20:10:29', NULL, 1, NULL),
-(7, 'desiminasi', '83e2b3494c1585eda4a7ced1633e6c7a', 1, 1, NULL, '2013-12-04 20:10:41', NULL, 1, NULL),
-(8, 'telematika', '0d403864f892648d2ec29f3b038d638a', 1, 1, NULL, '2013-12-04 20:10:53', NULL, 1, NULL),
-(9, 'pengendalian', '8c3813aa2df29c6562c2f1589a01d830', 1, 1, NULL, '2013-12-04 20:12:28', NULL, 1, NULL),
-(10, 'edison8302', '5b491f702c8ec3b957a3b01aa406b829', 2, 1, NULL, '2013-12-05 11:34:51', '2013-12-05 11:38:03', 1, 1);
+INSERT INTO `user` (`id`, `username`, `password`, `keterangan`, `parent_id`, `role_id`, `status`, `last_login`, `create_time`, `update_time`, `create_user_id`, `update_user_id`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '', 0, 1, 1, '2013-12-02 14:18:43', NULL, '2013-12-05 06:38:01', NULL, 1),
+(2, 'sekretariat', '5b491f702c8ec3b957a3b01aa406b829', '', 0, 2, 1, NULL, '2013-12-04 20:09:05', '2013-12-05 16:08:38', 1, 1),
+(3, 'edison8301', '5b491f702c8ec3b957a3b01aa406b829', '', 4, 5, 1, NULL, '2013-12-04 20:09:51', '2013-12-06 05:22:23', 1, 1),
+(4, 'keuangan', 'a4151d4b2856ec63368a7c784b1f0a6e', '', 0, 2, 1, NULL, '2013-12-04 20:10:02', '2013-12-06 05:32:16', 1, 1),
+(5, 'program', 'a9c449d4fa44e9e5a41c574ae55ce4d9', '', 2, 5, 1, NULL, '2013-12-04 20:10:14', '2013-12-06 05:22:38', 1, 1),
+(6, 'postel', '2b9afa616f6820d810268b6f72068ae8', '', 4, 5, 1, NULL, '2013-12-04 20:10:29', '2013-12-06 05:22:52', 1, 1),
+(7, 'desiminasi', '83e2b3494c1585eda4a7ced1633e6c7a', '', 4, 3, 1, NULL, '2013-12-04 20:10:41', '2013-12-06 05:43:38', 1, 1),
+(8, 'telematika', '0d403864f892648d2ec29f3b038d638a', '', 0, 1, 1, NULL, '2013-12-04 20:10:53', NULL, 1, NULL),
+(9, 'pengendalian', '8c3813aa2df29c6562c2f1589a01d830', '', 0, 1, 1, NULL, '2013-12-04 20:12:28', NULL, 1, NULL),
+(10, 'edison8302', '5b491f702c8ec3b957a3b01aa406b829', '', 0, 2, 1, NULL, '2013-12-05 11:34:51', '2013-12-05 11:38:03', 1, 1);
