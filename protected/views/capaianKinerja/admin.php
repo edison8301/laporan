@@ -42,6 +42,7 @@ $this->menu = array(
 		'dataProvider'=>$model->search(),
 		'filter'=>$model,
 		'columns'=>array(
+			'urutan',
 			'kode',
 			'program',
 			'kegiatan',

@@ -94,13 +94,18 @@ class CapaianKinerjaController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-			
+		
+		$urutan = CapaianKinerja::model()->countByAttributes(array('user_id'=>Yii::app()->user->id,'tahun'=>date('Y')));
+		$urutan++;
+		$model->urutan = $urutan;
+		
 		if(isset($_POST['CapaianKinerja']))
 		{
 			$model->attributes=$_POST['CapaianKinerja'];
 			$model->user_id = Yii::app()->user->id;
 			if($model->save())
 			{
+				$model->updateUrutan();
 				Yii::app()->user->setFlash('success','Data berhasil disimpan');
 				$this->redirect(array('admin'));
 			}
@@ -128,6 +133,7 @@ class CapaianKinerjaController extends Controller
 			$model->attributes=$_POST['CapaianKinerja'];
 			if($model->save())
 			{
+				$model->updateUrutan();
 				Yii::app()->user->setFlash('success','Data berhasil disimpan');
 				$this->redirect(array('admin'));
 			}
@@ -237,7 +243,7 @@ class CapaianKinerjaController extends Controller
 		foreach(CapaianKinerja::model()->getData() as $data)
 		{
 			$table->addRow();
-			$table->addCell(100)->addText($i,array(),$paraStyle);
+			$table->addCell(100)->addText($data->urutan,array(),$paraStyle);
 			$table->addCell(100)->addText($data->kode,array(),$paraStyle);
 			$table->addCell(100)->addText($data->program,array(),$paraStyle);
 			$table->addCell(100)->addText($data->kegiatan,array(),$paraStyle);
@@ -308,7 +314,7 @@ class CapaianKinerjaController extends Controller
 
 		foreach(CapaianKinerja::model()->getData() as $data)
 		{
-			$PHPExcel->getActiveSheet()->setCellValue('A'.$kolom, $i);
+			$PHPExcel->getActiveSheet()->setCellValue('A'.$kolom, $data->urutan);
 			$PHPExcel->getActiveSheet()->setCellValue('B'.$kolom, $data->kode);
 			$PHPExcel->getActiveSheet()->setCellValue('C'.$kolom, $data->program);
 			$PHPExcel->getActiveSheet()->setCellValue('D'.$kolom, $data->kegiatan);

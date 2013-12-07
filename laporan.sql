@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Waktu pembuatan: 06. Desember 2013 jam 10:42
+-- Waktu pembuatan: 07. Desember 2013 jam 20:01
 -- Versi Server: 5.1.33
 -- Versi PHP: 5.2.9
 
@@ -27,6 +27,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `capaian_kinerja` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `urutan` int(11) DEFAULT '1',
   `kode` varchar(255) NOT NULL,
   `program` varchar(255) DEFAULT NULL,
   `kegiatan` varchar(255) DEFAULT NULL,
@@ -38,18 +39,19 @@ CREATE TABLE IF NOT EXISTS `capaian_kinerja` (
   `tahun` year(4) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data untuk tabel `capaian_kinerja`
 --
 
-INSERT INTO `capaian_kinerja` (`id`, `kode`, `program`, `kegiatan`, `jenis_indikator`, `indikator`, `target`, `realisasi`, `keterangan`, `tahun`, `user_id`) VALUES
-(2, 'A-01', 'Program A', '', 'Ip', '', '', '', '', 2013, 1),
-(3, 'A-03', 'Program B', '', NULL, '', '', '', '', 2013, 1),
-(4, 'A-02', 'Tes A', '', NULL, '', '', '', '', 2013, 1),
-(5, 'B-01', 'Program B', '', NULL, '', '', '', '', 2012, 1),
-(6, 'C-01', 'Program C', '', NULL, '', '', '', '', 2013, 3);
+INSERT INTO `capaian_kinerja` (`id`, `urutan`, `kode`, `program`, `kegiatan`, `jenis_indikator`, `indikator`, `target`, `realisasi`, `keterangan`, `tahun`, `user_id`) VALUES
+(2, 1, 'A-01', 'Program A', '', 'Ip', '', '', '', '', 2013, 1),
+(3, 2, 'A-03', 'Program B', '', '', '', '', '', '', 2013, 1),
+(4, 4, 'A-02', 'Tes A', '', '', '', '', '', '', 2013, 1),
+(5, 1, 'B-01', 'Program B', '', NULL, '', '', '', '', 2012, 1),
+(6, 1, 'C-01', 'Program C', '', NULL, '', '', '', '', 2013, 3),
+(7, 3, 'tes', '', '', '', '', '', '', '', 2013, 1);
 
 -- --------------------------------------------------------
 

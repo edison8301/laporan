@@ -43,7 +43,7 @@ class CapaianKinerja extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('kode', 'required'),
-			array('user_id', 'numerical', 'integerOnly'=>true),
+			array('user_id, urutan', 'numerical', 'integerOnly'=>true),
 			array('kode, program, kegiatan, jenis_indikator, indikator, target, realisasi, keterangan', 'length', 'max'=>255),
 			array('tahun','safe'),
 			// The following rule is used by search().
@@ -114,7 +114,7 @@ class CapaianKinerja extends CActiveRecord
 			$criteria->addCondition('user_id = '.Yii::app()->user->id);
 		}
 		
-		$criteria->order = 'kode ASC';
+		$criteria->order = 'urutan ASC';
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -126,8 +126,21 @@ class CapaianKinerja extends CActiveRecord
 		$criteria = new CDbCriteria;
 		$criteria->addCondition('tahun = '.Bantu::getTahun());
 		$criteria->addCondition('user_id = '.Bantu::getUserId());
-		$criteria->order = 'kode ASC';
+		$criteria->order = 'urutan ASC';
 		
 		return CapaianKinerja::model()->findAll($criteria);
+	}
+	
+	public function updateUrutan()
+	{
+		$i=1;
+		foreach(CapaianKinerja::model()->findAllByAttributes(array('user_id'=>$this->user_id,'tahun'=>$this->tahun),array('order'=>'urutan ASC')) as $data)
+		{
+			$data->urutan = $i;
+			$data->save();
+			$i++;
+		}
+		
+		return true;
 	}
 }
